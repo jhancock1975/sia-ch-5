@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this is context for csv importer programs 
+	for some wierd reason I had to split td-importer
+	and st-importer into their own classes.
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring
+    http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
+
+	<context:component-scan base-package="com.rootser.dao,com.rootser.importer" />
+
+	<bean id="hdao" class="com.rootser.dao.HibernateStockDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="tdParser"
+		class="com.rootser.csvparser.tdameritrade.TdAmeritradeParseSvcImpl">
+		<property name="resolver" ref="resolver" />
+		<property name="resourcePattrnStr" value="classpath*:transaction*csv" />
+		<property name="delimiter" value="," />
+	</bean>
+
+	<bean id="tdMapper" class="com.rootser.mapper.TdAmeriBeanToStockTx"/>
+	
+	<bean id="stParser" class="com.rootser.csvparser.scottrade.ScottTradeParseSvcImpl">
+		<property name="resolver" ref="resolver" />
+		<property name="resourcePattrnStr" value="classpath*:Transaction*csv" />
+		<property name="delimiter" value="," />
+	</bean>
+	
+	<bean id="stMapper" class="com.rootser.mapper.ScottTradeBeanToStockTx"/>
+	
+	<bean id="resolver"
+		class="org.springframework.core.io.support.PathMatchingResourcePatternResolver" />
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://delicious:3306/stocks" />
+		<property name="username" value="john" />
+		<property name="password" value="ramanujan" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="10" />
+	</bean>
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.rootser" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="dialect">org.hibernate.dialect.HSQLDialect</prop>
+			</props>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<!-- You need these to stop Hibernate from throwing No Hibernate Session 
+		bound to thread, and configuration does not allow creation of non-transactional 
+		one here Exceptions -->
+	<tx:annotation-driven transaction-manager="txManager" />
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<ehcache:annotation-driven
+		create-missing-caches="true" cache-manager="ehCacheManager" />
+	<bean id="ehCacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml" />
+	</bean>
+
+</beans>

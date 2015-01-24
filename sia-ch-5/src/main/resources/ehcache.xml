@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+	<defaultCache eternal="true" maxElementsInMemory="100"
+		overflowToDisk="false" />
+	<cache name="messageCache" eternal="false" maxElementsInMemory="800"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="28800"
+		timeToLiveSeconds="28800" memoryStoreEvictionPolicy="LRU" />
+	<cache name="stocksHeld" eternal="false" maxElementsInMemory="800"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="28800"
+		timeToLiveSeconds="28800" memoryStoreEvictionPolicy="LRU" />
+	<cache name="commishFreeEtfs" eternal="false"
+		maxElementsInMemory="800" overflowToDisk="false" diskPersistent="false"
+		timeToIdleSeconds="28800" timeToLiveSeconds="28800"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache name="commishFreeEtfsAndTickers" eternal="false"
+		maxElementsInMemory="800" overflowToDisk="false" diskPersistent="false"
+		timeToIdleSeconds="28800" timeToLiveSeconds="28800"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache name="pctOff52WkLow" eternal="false" maxElementsInMemory="800"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="28800"
+		timeToLiveSeconds="28800" memoryStoreEvictionPolicy="LRU" />
+	<cache name="reportCache" eternal="false" maxElementsInMemory="800"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="3600"
+		timeToLiveSeconds="3600" memoryStoreEvictionPolicy="LRU" />
+	<cache name="commishFreeScrapeDataCache" eternal="false"
+		maxElementsInMemory="800" overflowToDisk="false" diskPersistent="false"
+		timeToIdleSeconds="3600" timeToLiveSeconds="5"
+		memoryStoreEvictionPolicy="LRU" />
+	<cache name="stocksHeldScrapeDataCache" eternal="false"
+		maxElementsInMemory="800" overflowToDisk="false" diskPersistent="false"
+		timeToIdleSeconds="3600" timeToLiveSeconds="28800"
+		memoryStoreEvictionPolicy="LRU" />
+</ehcache>

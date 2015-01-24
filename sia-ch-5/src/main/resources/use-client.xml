@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+<bean id="useClient" class="com.rootser.scraper.UseClient">
+	<property name="client" ref="client" />
+	<property name="get" ref="get"/>
+	<property name="responseHandler" ref="responseHandler"/>
+	<property name="divYear" ref="divYear"/>
+</bean>
+<bean id="client" class="org.apache.http.impl.client.DefaultHttpClient" />
+<bean id="get" class="org.apache.http.client.methods.HttpGet">
+	<constructor-arg value="http://ichart.finance.yahoo.com/table.csv?s=JNK&amp;a=03&amp;b=7&amp;c=2012&amp;d=03&amp;e=7&amp;f=2013&amp;g=d&amp;ignore=.csv"/>
+</bean>
+<bean id="responseHandler" class="org.apache.http.impl.client.BasicResponseHandler"/>
+<bean id="divYear" class="org.apache.http.client.methods.HttpGet">
+	<constructor-arg value="http://ichart.finance.yahoo.com/table.csv?s=JNK&amp;a=03&amp;b=7&amp;c=2012&amp;d=03&amp;e=7&amp;f=2013&amp;g=v&amp;ignore=.csv"/>
+</bean>
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+   
+	
+	<bean id="tdParser" class="com.rootser.csvparser.tdameritrade.TdAmeritradeParseSvcImpl">
+		<property name="resolver" ref="resolver" />
+		<property name="resourcePattrnStr" value="classpath*:transaction*csv" />
+		<property name="delimiter" value="," />
+	</bean>
+	
+	<bean id="stParser" class="com.rootser.csvparser.scottrade.ScottTradeParseSvcImpl">
+		<property name="resolver" ref="resolver" />
+		<property name="resourcePattrnStr" value="classpath*:Transaction*csv" />
+		<property name="delimiter" value="," />
+	</bean>
+	<bean id="resolver"
+		class="org.springframework.core.io.support.PathMatchingResourcePatternResolver" />
+	
+</beans>

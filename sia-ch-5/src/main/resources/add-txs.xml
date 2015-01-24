@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	<bean id="addTxs" class="com.rootser.dao.AddTxs">
+		<property name="mappers" ref="mappers" />
+	</bean>
+	<bean id="mappers" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="scottTradeMapper"/>
+				<ref bean="tdMapper" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="scottTradeMapper" class="com.rootser.mapper.ScottTradeBeanToStockTx">
+		<property name="parseSvc" ref="scottyParser" />
+	</bean>
+		<bean id="tdMapper" class="com.rootser.mapper.TdAmeriBeanToStockTx">
+		<property name="parseSvc" ref="tdParser" />
+	</bean>
+</beans>

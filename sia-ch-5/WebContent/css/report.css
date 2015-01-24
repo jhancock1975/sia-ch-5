@@ -1,0 +1,28 @@
+#msgid {color:black;text-align:center;}
+#page-wrap {
+     width: 1024px;
+     margin: 0 auto;
+}
+#rootserLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+table.reportTable tr:nth-child(odd)	{
+	background-color:#eee; 
+}
+table.reportTable tr:nth-child(even){
+	background-color:#fff; 
+}
+
+table.reportTable td {
+	border : 0;
+}
+
+table.reportTable th {
+	border : 0;
+}
+table.reportTable caption {
+	font-size: 1.1em;
+}
