@@ -17,7 +17,7 @@
 		,com.rootser.controller" />
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://delicious:3306/stocks?autoReconnect=true" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/stocks?autoReconnect=true" />
 		<property name="username" value="john" />
 		<property name="password" value="ramanujan" />
 		<property name="initialSize" value="5" />

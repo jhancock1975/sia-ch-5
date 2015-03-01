@@ -129,7 +129,7 @@ public class JsonReport extends AbstractReport implements Report {
 			RootserLogger.logger.debug("null pointer exception when generating report");
 			RootserLogger.logger.debug(e.getMessage());
 		}
-		try {
+		/*try {
 			result.add( getStocksHeld20PctAbove52WkLow());
 		} catch (ReportException e) {
 			addMessage(ReportMessage.ReportGenerateError);
@@ -146,7 +146,7 @@ public class JsonReport extends AbstractReport implements Report {
 			addMessage(ReportMessage.NullPointerException);
 			RootserLogger.logger.debug("null pointer exception when generating report");
 			RootserLogger.logger.debug(e.getMessage());
-		}
+		}*/
 		try {
 			result.add( getCommishFreeEtfsByMetric());
 		} catch(ReportException e){

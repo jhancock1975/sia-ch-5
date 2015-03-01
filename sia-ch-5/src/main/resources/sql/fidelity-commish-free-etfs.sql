@@ -1,3 +1,5 @@
+use stocks;
+
 insert into stocks (description, ticker, brokerTypeId) values
 ('Barclays 0-5 Year TIPS Bond ','STIP', 4),
 ('Barclays 1-3 Year Treasury Bond ','SHY', 4),
